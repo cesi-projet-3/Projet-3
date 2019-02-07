@@ -1,19 +1,20 @@
 #!/bin/bash
 
-log_file='/var/log/apache2/access.log' #Fichier de log d'accès au site web
+log_file='/var/log/apache2/access.log' #Log file of web access
 
-time=$(uptime | cut -d' ' -f2 | sed -e 's/:/_/g') #on récupère l'heure actuelle du système en le sélectionnant avec cut et en remplaçant les ":" par des "_"
-date=$(date +%d_%m_) #on récupère la date actuelle de la machine avec le format "jour_minute_"
-filename="access_$date$time.csv" #On nomme le fichier .csv avec la date et l'heure actuelle de création
+time=$(uptime | cut -d' ' -f2 | sed -e 's/:/_/g') #We get current system's time selecting it with cut, then we replace ":" chars with "_"
+date=$(date +%d_%m_) #We get current system's date with "day_minute_" format
+filename="access_$date$time.csv" #We name the .csv file with date and time
 
-echo "Heure;Adresse IP" > $filename #On créer les colonnes Heure et Adresse IP en CSV
+echo "Heure,Adresse IP" > $filename #We create "hour" and "IP Adress" columns and write it to the csv file
+echo "" >> $filename #We create a new line
 
 
-#on lit le contenu du fichier log, puis on sélectionne seulement l'heure et l'adresse IP avec la commande sed puis on l'écrit à la suite du fichier
-cat /var/log/apache2/access.log | sed -r -n -e 's/(([0-9]+.){3}[0-9]) .+(([0-9]{2}:){2}[0-9]{2}).+/\3;\1/p' >> $filename
+#We read the log file content and we select only time and IP Adress with the "sed" command, then we add it to the csv file
+cat /var/log/apache2/access.log | sed -r -n -e 's/(([0-9]+.){3}[0-9]) .+(([0-9]{2}:){2}[0-9]{2}).+/\3,\1/p' >> $filename
 
-#on copie le contenu du fichier log dans un fichier bakup pour ensuite le vider
+#We create a copy backup of the access.log file in order to empty it
 cat $log_file >> "$log_file.bak"
 
-#on vide le contenu du fichier de log
+#We empty the log file
 echo "" > $log_file
