@@ -9,7 +9,6 @@ filename="access_$date$time.csv" #We name the .csv file with date and time
 echo "Heure,Adresse IP" > $filename #We create "hour" and "IP Adress" columns and write it to the csv file
 echo "" >> $filename #We create a new line
 
-
 #We read the log file content and we select only time and IP Adress with the "sed" command, then we add it to the csv file
 cat /var/log/apache2/access.log | sed -r -n -e 's/(([0-9]+.){3}[0-9]) .+(([0-9]{2}:){2}[0-9]{2}).+/\3,\1/p' >> $filename
 
