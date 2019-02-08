@@ -24,3 +24,6 @@ if [ $nbre_full_save -gt 1 ]; then #Si c'est plus grand que 1, alors
     tar zcvf "web_$dir_to_tar.tar.gz" $dir_to_tar 2>&1 > /dev/null #On le compresse
     rm -rf $dir_to_tar #puis on supprime le dossier
 fi
+
+nbre_inc_save=$(ls -l | grep "inc_save")
+rm -rf $nbre_inc_save
