@@ -11,19 +11,20 @@ fi
 
 cdate=$(date +%Y_%m_%d) #we get the current date
 
-dir_save="/home/clement/projets/CESI/Projet-3/scripts/full_save_$cdate" #on nomme le dossier de sauvegarde avec la date
+dir_save="/home/clement/projets/CESI/Projet-3/scripts/full_save_$cdate" #We name the folder for the current save
 
-mkdir -p $dir_save #On crée le fichier
+mkdir -p $dir_save #Directory creation
 
-sudo cp -r $site_dir $dir_save #On copie le contenu du site dans le dossier de sauvegarde
+sudo cp -r $site_dir $dir_save #We copy the whole config into the save directory
 
-nbre_full_save=$(ls -l | grep "full_save" | wc -l) #On regarde le nombre de dossiers de sauvegarde
+nbre_full_save=$(ls -l | grep "full_save" | wc -l) #We look for the numbre of save folders
 
-if [ $nbre_full_save -gt 1 ]; then #Si c'est plus grand que 1, alors
-    dir_to_tar=$(ls -l | grep "full_save" | tail -n2 | sed -r -e '2d;s/.+ //') #On récupère l'avant dernier dossier de sauvegarde complète
-    tar zcvf "web_$dir_to_tar.tar.gz" $dir_to_tar 2>&1 > /dev/null #On le compresse
-    rm -rf $dir_to_tar #puis on supprime le dossier
+if [ $nbre_full_save -gt 1 ]; then #If it is more than 1, so
+    dir_to_tar=$(ls -l | grep "full_save" | tail -n2 | sed -r -e '2d;s/.+ //') #We get the folder before the last
+    tar zcvf "web_$dir_to_tar.tar.gz" $dir_to_tar 2>&1 > /dev/null #We zip it
+    rm -rf $dir_to_tar #Then we remove the the save folder to free space
 fi
 
+#We get all the incremential folders and we remove them
 nbre_inc_save=$(ls -l | grep "inc_save")
 rm -rf $nbre_inc_save
