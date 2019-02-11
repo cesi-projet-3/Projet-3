@@ -1,0 +1,23 @@
+config_dir='/etc/apache2/
+'
+let "nbr_saves=$(ls-l | wc -l)-1"
+
+if [ $nbr_saves -eq 182 ]; then
+	filename=$(ls -l | sed -r -e '1d;s/.+ //' | head -n1)
+	rm $filename
+fi
+
+cdate=$(date +%Y_%m_%d)
+
+dir_save="/home/user/CESI/projet/projet 3 Système/script/saves/full_save_%cdate"
+
+mkdir $dir_save
+
+sudo cp -r $config_dir $dir_save
+
+nbr_full_save=$(ls -l | grep "full_save" | wc -l)
+
+if [ $nbr_full_save -gt 1 ]; then
+	dir_to_tar=$(ls -l | grep "config_full_save" | tail -n2 | sed -r -e '2d;s/.+ //')
+	rm -rf $dir_to_tar
+fi
