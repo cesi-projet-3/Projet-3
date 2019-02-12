@@ -1,0 +1,22 @@
+body
+{
+    background-color: #BDBDBD ;
+
+}
+h1
+{
+    color: darkblue;
+}
+label,
+textarea {
+    font-size: .8rem;
+    letter-spacing: 1px;
+}
+textarea {
+    padding: 10px;
+    line-height: 1.5;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+
