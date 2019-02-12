@@ -1,16 +1,18 @@
 config_dir='/etc/apache2/'
 
+cd /mnt/saves/config
+
 save=$(ls -l | grep "full_save" | tail -n1 | sed -r -e 's/.+ //')
 
 if [ -z $save ]; then
 	save=$(ls -l | grep "full_save" | tail n-1 | sed -r -e 's/.+ //')
 fi
 
-dir="/home/user/CESI/projet/projet 3 Système/scripts/$save/fichier_config"
+dir="/mnt/saves/config/$save/apache2"
 
 time=$(uptime | cut -d' ' -f2 | sed -e 's/:/_/g')
 
-inc_dir="/home/user/CESI/projet/projet_3_système/scripts/inc_save_$time/fichier_config"
+inc_dir="/mnt/saves/config/inc_save_$time/apache2"
 
 cd $config_dir
 

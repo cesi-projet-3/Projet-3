@@ -2,6 +2,8 @@
 
 site_dir="/var/www/carnofluxe.domain" #we store the site's location
 
+cd /mnt/saves/web
+
 let "nbre_saves=$(ls -l | wc -l)-1" #we count the saves present in the directory (less one, which is a line that isn't representating a file)
 
 if [ $nbre_saves -eq 182 ]; then #if there are 182 files (1 save per day, for 6 months = 182 files)
@@ -11,7 +13,7 @@ fi
 
 cdate=$(date +%Y_%m_%d) #we get the current date
 
-dir_save="/home/clement/projets/CESI/Projet-3/scripts/full_save_$cdate" #We name the future save directory
+dir_save="/mnt/saves/web/full_save_$cdate" #We name the future save directory
 
 mkdir -p $dir_save #We create the folder
 

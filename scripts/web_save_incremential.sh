@@ -2,17 +2,19 @@
 
 site_dir='/var/www/carnofluxe.domain' #We define the website directory
 
+cd /mnt/saves/web
+
 save=$(ls -l | grep "inc_save" | tail -n1 | sed -r -e 's/.+ //') #We search the last incremential save directory
 
 if [ -z $save ]; then #If it doesn't exist, we get the last full save
     save=$(ls -l | grep "full_save" | tail -n1 | sed -r -e 's/.+ //')
 fi
 
-dir="/home/clement/projets/CESI/Projet-3/scripts/$save/carnofluxe.domain" #We set the full path of the last save
+dir="/mnt/saves/web/$save/carnofluxe.domain" #We set the full path of the last save
 
 time=$(uptime | cut -d' ' -f2 | sed -e 's/:/_/g') #We get the current time
 
-inc_dir="/home/clement/projets/CESI/Projet-3/scripts/inc_save_$time/carnofluxe.domain" #We set the full path of the current save
+inc_dir="/mnt/saves/web/inc_save_$time/carnofluxe.domain" #We set the full path of the current save
 
 cd $site_dir #We change directory to the website dir
 

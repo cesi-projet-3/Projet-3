@@ -2,6 +2,8 @@
 
 site_dir="/etc/apache2" #we store the site's location
 
+cd /mnt/saves/config
+
 let "nbre_saves=$(ls -l | wc -l)-1" #we count the saves present in the directory (less one, which is a line that isn't representating a file)
 
 if [ $nbre_saves -eq 182 ]; then #if there are 182 files (1 save per day, for 6 months = 182 files)
@@ -11,11 +13,11 @@ fi
 
 cdate=$(date +%Y_%m_%d) #we get the current date
 
-dir_save="/home/clement/projets/CESI/Projet-3/scripts/full_save_$cdate" #on nomme le dossier de sauvegarde avec la date
+dir_save="/mnt/saves/config/full_save_$cdate" #on nomme le dossier de sauvegarde avec la date
 
 mkdir -p $dir_save #On crée le fichier
 
-sudo cp -r $site_dir $dir_save #On copie le contenu du site dans le dossier de sauvegarde
+cp -r $site_dir $dir_save #On copie le contenu du site dans le dossier de sauvegarde
 
 nbre_full_save=$(ls -l | grep "full_save" | wc -l) #On regarde le nombre de dossiers de sauvegarde
 

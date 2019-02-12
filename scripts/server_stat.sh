@@ -1,6 +1,6 @@
 #!/bin/bash
 
-csv_file="server_status.csv"
+csv_file="/root/projet/server_status.csv"
 
 echo "Status du serveur HTTP,Resolution de nom,accessibilite,Temps de reponse" > $csv_file
 
